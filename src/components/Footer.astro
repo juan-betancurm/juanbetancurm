@@ -1,19 +1,38 @@
 ---
 import Logo from './Logo.astro';
+import Container from './Container.astro';
+import { SOCIALS } from '../consts';
 ---
-<footer class="bg-white">
-  <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-    <div class="sm:flex sm:items-center sm:justify-between">
-      <div class="flex justify-center sm:justify-start">
-         <a class="block" href="#">
+
+<footer class="relative bg-white z-10 border-t border-gray-100">
+  <Container size="md">
+    <div class="py-12 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <!-- Logo y Copyright -->
+      <div class="flex flex-col sm:flex-row items-center gap-4 text-sm text-gray-500">
+        <a class="inline-block" href="/">
           <span class="sr-only">Home</span>
           <Logo class="text-[#181b32]" />
         </a>
+        <span class="hidden sm:inline">|</span>
+        <span>© {new Date().getFullYear()} All rights reserved</span>
       </div>
 
-      <p class="mt-4 text-center text-sm text-gray-500 lg:mt-0 lg:text-right">
-        Copyright © 2026. All rights reserved.
-      </p>
+      <!-- Social Links -->
+      <div class="flex items-center gap-4">
+        {SOCIALS.map((social) => (
+          <a
+            href={social.HREF}
+            target={social.ICON === 'email' ? undefined : '_blank'}
+            rel={social.ICON === 'email' ? undefined : 'noopener noreferrer'}
+            aria-label={social.NAME}
+            class="text-gray-600 hover:text-gray-900 transition-colors"
+          >
+            <svg class="w-5 h-5" fill="currentColor">
+              <use href={`/social.svg#${social.ICON}`}></use>
+            </svg>
+          </a>
+        ))}
+      </div>
     </div>
-  </div>
+  </Container>
 </footer>

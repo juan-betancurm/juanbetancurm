@@ -1,12 +1,16 @@
 ---
 import Logo from "./Logo.astro";
+import Container from "./Container.astro";
+
+// Detectar si estamos en la home
+const isHome = Astro.url.pathname === '/';
 ---
 
-<header class="bg-white">
-	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+<header id="header" class={`fixed top-0 w-full z-50 transition-all duration-300 ${isHome ? '' : 'bg-white'}`}>
+	<Container size="md">
 		<div class="flex h-16 items-center justify-between">
 			<div class="md:flex md:items-center md:gap-12">
-				<a class="block" href="#">
+				<a class="block" href="/">
 					<span class="sr-only">Home</span>
 					<Logo class="text-[#181b32]" />
 				</a>
@@ -27,7 +31,7 @@ import Logo from "./Logo.astro";
 						<li>
 							<a
 								class="text-gray-500 transition hover:text-gray-500/75"
-								href="work"
+								href="/work"
 							>
 								Work
 							</a>
@@ -36,7 +40,7 @@ import Logo from "./Logo.astro";
 						<li>
 							<a
 								class="text-gray-500 transition hover:text-gray-500/75"
-								href="#"
+								href="/blog"
 							>
 								Blog
 							</a>
@@ -45,7 +49,7 @@ import Logo from "./Logo.astro";
 						<li>
 							<a
 								class="text-gray-500 transition hover:text-gray-500/75"
-								href="#"
+								href="/projects"
 							>
 								Projects
 							</a>
@@ -93,7 +97,7 @@ import Logo from "./Logo.astro";
 				</div>
 			</div>
 		</div>
-	</div>
+	</Container>
 	<div
 		id="mobile-menu"
 		class="fixed inset-0 z-40 flex items-center justify-center bg-white md:hidden"
@@ -112,7 +116,7 @@ import Logo from "./Logo.astro";
 				<li>
 					<a
 						class="text-gray-500 transition hover:text-gray-500/75"
-						href="work"
+						href="/work"
 					>
 						Work
 					</a>
@@ -121,7 +125,7 @@ import Logo from "./Logo.astro";
 				<li>
 					<a
 						class="text-gray-500 transition hover:text-gray-500/75"
-						href="#"
+						href="/blog"
 					>
 						Blog
 					</a>
@@ -130,7 +134,7 @@ import Logo from "./Logo.astro";
 				<li>
 					<a
 						class="text-gray-500 transition hover:text-gray-500/75"
-						href="#"
+						href="/projects"
 					>
 						Projects
 					</a>
@@ -148,6 +152,12 @@ import Logo from "./Logo.astro";
 	#mobile-menu.is-open {
 		transform: translateY(0);
 	}
+
+	/* Línea de separación al hacer scroll */
+	#header.scrolled {
+		border-bottom: 1px solid rgb(229 231 235);
+		background-color: white;
+	}
 </style>
 
 <script>
@@ -163,4 +173,15 @@ import Logo from "./Logo.astro";
 			closeIcon.classList.toggle("hidden");
 		});
 	}
+
+	// Detectar scroll para agregar línea de separación
+	const header = document.getElementById("header");
+	
+	window.addEventListener("scroll", () => {
+		if (window.scrollY > 0) {
+			header?.classList.add("scrolled");
+		} else {
+			header?.classList.remove("scrolled");
+		}
+	});
 </script>

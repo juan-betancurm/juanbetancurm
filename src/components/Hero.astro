@@ -1,34 +1,66 @@
 ---
 import ParticlesBackground from "../components/ParticlesBackground.astro";
+import PageTransition from "src/components/PageTransition.astro";
+import BottomLayout from "src/layouts/BottomLayout.astro";
+import TopLayout from "src/layouts/TopLayout.astro";
+import { WORK } from "src/consts";
+import { getCollection } from "astro:content";
+
+const collection = await getCollection("work");
+
+collection.sort(
+	(a, b) =>
+		new Date(b.data.dateStart).getTime() - new Date(a.data.dateStart).getTime(),
+);
+
+const work = await Promise.all(
+	collection.map(async (item) => {
+		const { Content } = await item.render();
+		return { ...item, Content };
+	}),
+);
+
+function formatWorkDate(input: Date | string) {
+	if (typeof input === "string") return input;
+
+	const month = input.toLocaleDateString("en-US", {
+		month: "short",
+	});
+
+	const year = new Date(input).getFullYear();
+	return `${month} ${year}`;
+}
 ---
 
 <!-- Tu sección Hero -->
 <section
-	class="relative flex flex-col items-center justify-center min-h-screen bg-white overflow-hidden"
+	class="relative flex flex-col items-center justify-center min-h-screen bg-white overflow-hidden pt-16"
 >
+
 	<!-- 1. Aquí insertamos el componente de partículas -->
 	<div class="absolute inset-0 z-0">
+		
 		<ParticlesBackground />
 	</div>
 
 	<!-- 2. Contenedor del círculo gigante invertido -->
 	<div
-		class="absolute inset-0 top-1/5 z-10 pointer-events-none overflow-hidden"
+		id="planetcont"
+		class="animate absolute inset-0 top-1/4 overflow-hidden z-10"
 	>
-		<!-- CÍRCULO GIGANTE INVERTIDO -->
 		<div
-			class="absolute top-0 left-1/2 -translate-x-1/2 w-[300vw] sm:w-[250vw] md:w-[175vw] min-h-screen aspect-square rounded-full overflow-hidden"
+			id="crescent"
+			class="absolute top-0 left-1/2 -translate-x-1/2 w-[250vw] min-h-[100vh] aspect-square rounded-full p-[1px] bg-gradient-to-b from-black/25 from-0% to-transparent to-5%"
 		>
-			<!-- Capa de gradiente blanco a transparente -->
 			<div
-				class="absolute inset-0 bg-gradient-to-b from-white from-0% via-white via-5% to-transparent to-100%"
+				id="planet"
+				class="w-full h-full bg-white rounded-full p-[1px] overflow-hidden flex justify-center"
 			>
-			</div>
-
-			<!-- Efecto de Luz difusa en el borde superior (Atmósfera) -->
-			<div
-				class="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-16 sm:h-20 md:h-24 bg-gray-900/50 blur-3xl rounded-full"
-			>
+				<div
+					id="blur"
+					class="w-full h-20 rounded-full bg-neutral-900/25 blur-3xl"
+				>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -64,4 +96,7 @@ import ParticlesBackground from "../components/ParticlesBackground.astro";
 			</div>
 		</div>
 	</div>
+
 </section>
+
+

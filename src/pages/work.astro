@@ -2,6 +2,10 @@
 import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 import BottomLayout from "src/layouts/BottomLayout.astro";
+import TopLayout from "src/layouts/TopLayout.astro";
+import { WORK } from "src/consts";
+import PageTransition from "src/components/PageTransition.astro";
+
 const collection = await getCollection("work");
 
 collection.sort(
@@ -28,12 +32,14 @@ function formatWorkDate(input: Date | string) {
 }
 ---
 
-<Layout title="Work | Juan Betancur">
-	
+<Layout title={WORK.TITLE} description={WORK.DESCRIPTION}>
+	<PageTransition duration="1s" delay="0.2s">
+	<TopLayout>
 		<div class="animate page-heading">
-			<h1 class="black">Work</h1>
+			{WORK.TITLE}
 		</div>
-    <BottomLayout>
+	</TopLayout>
+	<BottomLayout>
 		<ul>
 			{
 				work.map((entry) => (
@@ -52,4 +58,5 @@ function formatWorkDate(input: Date | string) {
 			}
 		</ul>
 	</BottomLayout>
+	</PageTransition>
 </Layout>

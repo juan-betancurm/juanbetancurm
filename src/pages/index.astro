@@ -1,8 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Hero from '../components/Hero.astro'; // Nuevo componente
+import { SITE } from "src/consts";
+import PageTransition from "src/components/PageTransition.astro";
+import Work from "./work.astro";
 ---
-<Layout title="Home | Juan Betancur">
+<Layout title={`Home`} description={SITE.DESCRIPTION} fullWidth={true}>
 
     <Hero />
  

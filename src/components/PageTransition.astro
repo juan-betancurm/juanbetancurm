@@ -1,0 +1,66 @@
+---
+// Props opcionales por si quieres ajustar la duración o retardo desde fuera
+interface Props {
+    duration?: string; // Ej: "1s"
+    delay?: string;    // Ej: "0.2s"
+}
+
+const { duration = "1s", delay = "0s" } = Astro.props;
+---
+
+<!-- 
+  El contenedor inicial. 
+  'opacity-0' y 'translate-y-8' son clases de Tailwind para el estado inicial.
+  Si no usas Tailwind, el bloque <style> abajo se encarga.
+-->
+<div 
+    class="fade-in-section"
+    style={`--anim-duration: ${duration}; --anim-delay: ${delay};`}
+>
+    <slot />
+</div>
+
+<style>
+    /* Estado inicial: Invisible y desplazado hacia abajo */
+    .fade-in-section {
+        opacity: 0;
+        transform: translateY(30px);
+        /* Usamos variables CSS para controlar tiempos dinámicamente */
+        transition: opacity var(--anim-duration) ease-out, 
+                    transform var(--anim-duration) ease-out;
+        transition-delay: var(--anim-delay);
+        will-change: opacity, transform;
+    }
+
+    /* Estado final: Visible y en su posición original */
+    .fade-in-section.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+</style>
+
+<script>
+    // Este script se ejecuta en el cliente automáticamente
+    // Busca TODOS los elementos con la clase .fade-in-section y los anima
+    document.addEventListener('DOMContentLoaded', () => {
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1 // Se activa cuando el 10% del elemento es visible
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target); // Dejar de observar una vez animado
+                }
+            });
+        }, observerOptions);
+
+        const sections = document.querySelectorAll('.fade-in-section');
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    });
+</script>
