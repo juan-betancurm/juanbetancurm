@@ -1,31 +1,55 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Card from "../components/Card.astro";
+import { getCollection } from "astro:content";
+import BottomLayout from "src/layouts/BottomLayout.astro";
+const collection = await getCollection("work");
 
-const allPosts = await Astro.glob("../content/work/*.md");
+collection.sort(
+	(a, b) =>
+		new Date(b.data.dateStart).getTime() - new Date(a.data.dateStart).getTime(),
+);
+
+const work = await Promise.all(
+	collection.map(async (item) => {
+		const { Content } = await item.render();
+		return { ...item, Content };
+	}),
+);
+
+function formatWorkDate(input: Date | string) {
+	if (typeof input === "string") return input;
+
+	const month = input.toLocaleDateString("en-US", {
+		month: "short",
+	});
+
+	const year = new Date(input).getFullYear();
+	return `${month} ${year}`;
+}
 ---
 
 <Layout title="Work | Juan Betancur">
-	<div
-		class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4 sm:space-y-6 lg:space-y-8"
-	>
-		<div>
-			<h1 class="text-3xl font-bold text-gray-900 mb-6 mt-10 text-left">
-				Work Experience
-			</h1>
+	
+		<div class="animate page-heading">
+			<h1 class="black">Work</h1>
 		</div>
-		{
-			allPosts.map((item) => (
-				<Card 
-					dateRange={item.frontmatter.dateRange}
-					company={item.frontmatter.company}
-					position={item.frontmatter.position}
-					description={item.frontmatter.description}
-					achievements={item.frontmatter.achievements}
-				>
-					{" "}
-				</Card>
-			))
-		}
-	</div>
+    <BottomLayout>
+		<ul>
+			{
+				work.map((entry) => (
+					<li class="border-b border-black/10 mt-4 py-8 first-of-type:mt-0 first-of-type:pt-0 last-of-type:border-none">
+						<div class="text-sm uppercase mb-4">
+							{formatWorkDate(entry.data.dateStart)} -{" "}
+							{formatWorkDate(entry.data.dateEnd)}
+						</div>
+						<div class="text-black font-semibold">{entry.data.company}</div>
+						<div class="text-sm font-semibold">{entry.data.role}</div>
+						<article class="prose prose-sm border-4 border-red-500">
+  <entry.Content />
+</article>
+					</li>
+				))
+			}
+		</ul>
+	</BottomLayout>
 </Layout>
