@@ -5,9 +5,9 @@ import mdx from '@astrojs/mdx';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://juan-betancurm.github.io/juanbetancurm',
+  site: 'https://juan-betancurm.github.io',
   
-  base: '/juanbetancurm',
+  base: import.meta.env.PROD ? '/juanbetancurm' : '/',
 
   integrations: [
     tailwind(),

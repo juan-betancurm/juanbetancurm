@@ -4,14 +4,21 @@ import Container from "./Container.astro";
 import { LINKS } from "../consts";
 
 // Detectar si estamos en la home
-const isHome = Astro.url.pathname === import.meta.env.BASE_URL;
+const currentPath = Astro.url.pathname;
+const base = import.meta.env.BASE_URL;
+const isHome = currentPath === base || currentPath === `${base}/`;
+
+const processedLinks = LINKS.map(link => ({
+  ...link,
+  HREF: link.HREF === '/' ? base : `${base}${link.HREF.startsWith('/') ? link.HREF : '/' + link.HREF}`
+}));
 ---
 
 <header id="header" class={`fixed top-0 w-full z-50 transition-all duration-300 ${isHome ? '' : 'bg-white'}`}>
 	<Container size="md">
 		<div class="flex h-16 items-center justify-between">
 			<div class="md:flex md:items-center md:gap-12">
-				<a class="block" href="/">
+				<a class="block" href={base}>
 					<span class="sr-only">Home</span>
 					<Logo class="text-[#181b32]" />
 					
@@ -21,7 +28,7 @@ const isHome = Astro.url.pathname === import.meta.env.BASE_URL;
 			<div class="hidden md:block">
 				<nav aria-label="Global">
 					<ul class="flex items-center gap-6 text-sm">
-						{LINKS.map(link => (
+						{processedLinks.map(link => (
 							<li>
 								<a
 									class="text-gray-500 transition hover:text-gray-500/75"
@@ -81,7 +88,7 @@ const isHome = Astro.url.pathname === import.meta.env.BASE_URL;
 	>
 		<nav aria-label="Global mobile" class="p-4">
 			<ul class="flex flex-col items-center gap-6 text-2xl">
-				{LINKS.map(link => (
+				{processedLinks.map(link => (
 					<li>
 						<a
 							class="text-gray-500 transition hover:text-gray-500/75"
