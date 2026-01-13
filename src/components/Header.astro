@@ -1,59 +1,36 @@
 ---
 import Logo from "./Logo.astro";
 import Container from "./Container.astro";
+import { LINKS } from "../consts";
 
 // Detectar si estamos en la home
-const isHome = Astro.url.pathname === '/';
+const isHome = Astro.url.pathname === import.meta.env.BASE_URL;
 ---
 
 <header id="header" class={`fixed top-0 w-full z-50 transition-all duration-300 ${isHome ? '' : 'bg-white'}`}>
 	<Container size="md">
 		<div class="flex h-16 items-center justify-between">
 			<div class="md:flex md:items-center md:gap-12">
-				<a class="block" href="">
+				<a class="block" href="/">
 					<span class="sr-only">Home</span>
 					<Logo class="text-[#181b32]" />
+					
 				</a>
 			</div>
 
 			<div class="hidden md:block">
 				<nav aria-label="Global">
 					<ul class="flex items-center gap-6 text-sm">
-						<li>
-							<a
-								class="text-gray-500 transition hover:text-gray-500/75"
-								href=""
-							>
-								Home
-							</a>
-						</li>
-
-						<li>
-							<a
-								class="text-gray-500 transition hover:text-gray-500/75"
-								href="work"
-							>
-								Work
-							</a>
-						</li>
-
-						<li>
-							<a
-								class="text-gray-500 transition hover:text-gray-500/75"
-								href="#blog"
-							>
-								Blog
-							</a>
-						</li>
-
-						<li>
-							<a
-								class="text-gray-500 transition hover:text-gray-500/75"
-								href="#projects"
-							>
-								Projects
-							</a>
-						</li>
+						{LINKS.map(link => (
+							<li>
+								<a
+									class="text-gray-500 transition hover:text-gray-500/75"
+									href={link.HREF}
+								>
+									{link.TEXT}
+								</a>
+							</li>
+						))}
 					</ul>
 				</nav>
 			</div>
@@ -104,41 +81,16 @@ const isHome = Astro.url.pathname === '/';
 	>
 		<nav aria-label="Global mobile" class="p-4">
 			<ul class="flex flex-col items-center gap-6 text-2xl">
-				<li>
-					<a
-						class="text-gray-500 transition hover:text-gray-500/75"
-						href=""
-					>
-						Home
-					</a>
-				</li>
-
-				<li>
-					<a
-						class="text-gray-500 transition hover:text-gray-500/75"
-						href="work"
-					>
-						Work
-					</a>
-				</li>
-
-				<li>
-					<a
-						class="text-gray-500 transition hover:text-gray-500/75"
-						href="#blog"
-					>
-						Blog
-					</a>
-				</li>
-
-				<li>
-					<a
-						class="text-gray-500 transition hover:text-gray-500/75"
-						href="#projects"
-					>
-						Projects
-					</a>
-				</li>
+				{LINKS.map(link => (
+					<li>
+						<a
+							class="text-gray-500 transition hover:text-gray-500/75"
+							href={link.HREF}
+						>
+							{link.TEXT}
+						</a>
+					</li>
+				))}
 			</ul>
 		</nav>
 	</div>

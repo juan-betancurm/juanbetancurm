@@ -14,7 +14,7 @@
   <style>
     path { fill: #000; }
     @media (prefers-color-scheme: dark) {
-        path { fill: #FFF; }
+        path { fill: #FFFF; }
     }
   </style>
   <path

@@ -3,7 +3,7 @@ import type {Site, Page, Links, Socials} from "./types";
 
 
 export const SITE: Site = {
-  TITLE: "My personal site",
+  TITLE: "Jan Betancur",
   DESCRIPTION: "Welcome to my personal website!",
   AUTHOR: "Juan Betancur",
 }
@@ -12,6 +12,11 @@ export const SITE: Site = {
 export const WORK: Page = {
   TITLE: "Work",
   DESCRIPTION: "Places I have worked.",
+}
+
+export const PROJECTS: Page = {
+  TITLE: "Projects",
+  DESCRIPTION: "Recent projects I have worked on.",
 }
 //links
 export const LINKS: Links = [
@@ -22,6 +27,14 @@ export const LINKS: Links = [
   { 
     TEXT: "Work", 
     HREF: "/work", 
+  },
+  {
+    TEXT: "Blog",
+    HREF: "#blog",
+  },
+  {
+    TEXT: "Projects",
+    HREF: "/projects"
   }
 ]
 // Socials
