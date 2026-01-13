@@ -1,7 +1,10 @@
 ---
-import Logo from './Logo.astro';
-import Container from './Container.astro';
-import { SOCIALS } from '../consts';
+import Container from "./Container.astro";
+import Logo from "./Logo.astro";
+import { SOCIALS } from "../consts";
+
+const base = import.meta.env.BASE_URL;
+const socialSvgPath = `${base}/social.svg`;
 ---
 
 <footer class="relative bg-white z-10 border-t border-gray-100">
@@ -9,7 +12,7 @@ import { SOCIALS } from '../consts';
     <div class="py-12 flex flex-col sm:flex-row items-center justify-between gap-6">
       <!-- Logo y Copyright -->
       <div class="flex flex-col sm:flex-row items-center gap-4 text-sm text-gray-500">
-        <a class="inline-block" href="/">
+        <a class="inline-block" href={base}>
           <span class="sr-only">Home</span>
           <Logo class="text-[#181b32]" />
         </a>
@@ -28,7 +31,7 @@ import { SOCIALS } from '../consts';
             class="text-gray-600 hover:text-gray-900 transition-colors"
           >
             <svg class="w-5 h-5" fill="currentColor">
-              <use href={`/social.svg#${social.ICON}`}></use>
+              <use href={`${socialSvgPath}#${social.ICON}`}></use>
             </svg>
           </a>
         ))}
