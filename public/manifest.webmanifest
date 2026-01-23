@@ -1,0 +1,17 @@
+{
+  "name": "Juan Manuel Betancur Mesa",
+  "short_name": "juan-betancur",
+  "description": "Portafolio y marca personal de Juan Manuel Betancur",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3b82f6",
+  "icons": [
+    {
+      "src": "/logo-marca-personal.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
