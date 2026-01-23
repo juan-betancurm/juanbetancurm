@@ -4,28 +4,28 @@ import type {Site, Page, Links, Socials} from "./types";
 
 export const SITE: Site = {
   TITLE: "Jan Betancur",
-  DESCRIPTION: "Welcome to my personal website!",
+  DESCRIPTION: "Bienvenido a mi Web Personal!",
   AUTHOR: "Juan Betancur",
 }
 // Work Page
 
 export const WORK: Page = {
-  TITLE: "Work",
-  DESCRIPTION: "Places I have worked.",
+  TITLE: "Experiencia",
+  DESCRIPTION: "Lugares donde he trabajado.",
 }
 
 export const PROJECTS: Page = {
-  TITLE: "Projects",
-  DESCRIPTION: "Recent projects I have worked on.",
+  TITLE: "Proyectos",
+  DESCRIPTION: "Proyectos recientes en los que he trabajado.",
 }
 //links
 export const LINKS: Links = [
   { 
-    TEXT: "Home", 
+    TEXT: "Inicio", 
     HREF: "/", 
   },
   { 
-    TEXT: "Work", 
+    TEXT: "Experiencia", 
     HREF: "work", 
   },
   {
@@ -33,7 +33,7 @@ export const LINKS: Links = [
     HREF: "#blog",
   },
   {
-    TEXT: "Projects",
+    TEXT: "Proyectos",
     HREF: "projects"
   }
 ]
@@ -43,8 +43,8 @@ export const SOCIALS: Socials = [
   { 
     NAME: "Email",
     ICON: "email", 
-    TEXT: "juanmbetancurm@gmail.com",
-    HREF: "mailto:juanmbetancurm@gmail.com",
+    TEXT: "juanb9410@gmail.com",
+    HREF: "mailto:juanb9410@gmail.com",
   },
   { 
     NAME: "LinkedIn",

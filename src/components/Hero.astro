@@ -14,10 +14,8 @@ const projectsHref = `${base}/projects`;
 <section
 	class="relative flex flex-col items-center justify-center min-h-screen bg-white overflow-hidden pt-16"
 >
-
 	<!-- 1. Aquí insertamos el componente de partículas -->
 	<div class="absolute inset-0 z-0">
-		
 		<ParticlesBackground />
 	</div>
 
@@ -51,30 +49,35 @@ const projectsHref = `${base}/projects`;
 			class="relative z-10 flex flex-col items-center mt-16 sm:mt-20 md:mt-24 lg:mt-32 max-w-4xl mx-auto"
 		>
 			<h1
-				class="text-base sm:text-lg md:text-xl text-gray-400 mb-8 sm:mb-10 max-w-2xl mx-auto leading-relaxed"
+				class="text-base sm:text-lg md:text-xl text-gray-700 mb-8 sm:mb-10 max-w-2xl mx-auto leading-relaxed text-center"
 			>
-				Hi, I'm Juan Betancur
-			</h1>
+				<span class="block text-gray-900 font-bold italic mb-4">
+					"Hagas lo que hagas, hazlo con el corazón."
+				</span>
+				Aprendí hace tiempo que la diferencia entre algo bien hecho y algo extraordinario
+				reside en la entrega que le pones a cada detalle.
+				<br /><br />
+				En esta web comparto mi camino, mis proyectos y mi forma de ver el mundo.
+				<br /><br />
 
-			<div
-				class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto px-4 sm:px-0"
-			>
-				<a
-					href={workHref}
-					class="bg-gray-900 hover:bg-gray-700 transition-colors px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold shadow-lg shadow-blue-900/50 text-center text-sm sm:text-base text-white"
-				>
-					Work
-				</a>
-				<a
-					href={projectsHref}
-					class="bg-gray-900 hover:bg-gray-700 transition-colors px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold shadow-lg shadow-blue-900/50 text-center text-sm sm:text-base text-white"
-				>
-					Projects
-				</a>
-			</div>
+				Soy <span class="text-gray-900 font-semibold">Juan Manuel Betancur</span
+				> y te invito a conocer mi experiencia y los proyectos donde he dejado mi
+				huella.
+			</h1>
+			<div class="flex flex-row gap-3 w-full max-w-sm mx-auto px-4 justify-center">
+    <a
+        href={workHref}
+        class="flex-1 bg-gray-900 hover:bg-gray-700 transition-colors px-3 sm:px-6 py-2 sm:py-2.5 rounded-md font-semibold shadow-md shadow-blue-900/20 text-center text-xs sm:text-sm text-white"
+    >
+        Experiencia
+    </a>
+    <a
+        href={projectsHref}
+        class="flex-1 bg-gray-900 hover:bg-gray-700 transition-colors px-3 sm:px-6 py-2 sm:py-2.5 rounded-md font-semibold shadow-md shadow-blue-900/20 text-center text-xs sm:text-sm text-white"
+    >
+        Proyectos
+    </a>
+</div>
 		</div>
 	</div>
-
 </section>
-
-
