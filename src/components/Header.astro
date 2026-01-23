@@ -5,12 +5,11 @@ import { LINKS } from "../consts";
 
 // Detectar si estamos en la home
 const currentPath = Astro.url.pathname;
-const base = import.meta.env.BASE_URL;
-const isHome = currentPath === base || currentPath === `${base}/`;
+const isHome = currentPath === '/';
 
 const processedLinks = LINKS.map(link => ({
   ...link,
-  HREF: link.HREF === '/' ? base : `${base}${link.HREF.startsWith('/') ? link.HREF : '/' + link.HREF}`
+  HREF: link.HREF.startsWith('/') ? link.HREF : '/' + link.HREF
 }));
 ---
 
@@ -18,7 +17,7 @@ const processedLinks = LINKS.map(link => ({
 	<Container size="md">
 		<div class="flex h-16 items-center justify-between">
 			<div class="md:flex md:items-center md:gap-12">
-				<a class="block" href={base}>
+				<a class="block" href="/">
 					<span class="sr-only">Inicio</span>
 					<Logo class="text-[#181b32]" />
 					

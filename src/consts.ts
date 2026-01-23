@@ -3,7 +3,7 @@ import type {Site, Page, Links, Socials} from "./types";
 
 
 export const SITE: Site = {
-  TITLE: "Jan Betancur",
+  TITLE: "Juan Betancur",
   DESCRIPTION: "Bienvenido a mi Web Personal!",
   AUTHOR: "Juan Betancur",
 }

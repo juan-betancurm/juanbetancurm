@@ -3,8 +3,6 @@ import Container from "./Container.astro";
 import Logo from "./Logo.astro";
 import { SOCIALS, LINKS } from "../consts";
 
-const base = import.meta.env.BASE_URL;
-const socialSvgPath = `${base}social.svg`;
 const currentYear = new Date().getFullYear();
 ---
 
@@ -16,7 +14,7 @@ const currentYear = new Date().getFullYear();
         
         <!-- Brand Section -->
         <div class="flex flex-col items-center md:items-start gap-4">
-          <a class="inline-block transition-transform hover:scale-105" href={base}>
+          <a class="inline-block transition-transform hover:scale-105" href="/">
             <span class="sr-only">Inicio</span>
             <Logo class="text-[#181b32]" />
           </a>
@@ -29,7 +27,7 @@ const currentYear = new Date().getFullYear();
           </h3>
           <nav class="flex flex-col gap-3">
             {LINKS.map((link) => (
-              <a href={`${base}${link.HREF}`} class="text-gray-600 hover:text-gray-900 transition-colors text-sm">
+              <a href={link.HREF.startsWith('/') ? link.HREF : '/' + link.HREF} class="text-gray-600 hover:text-gray-900 transition-colors text-sm">
                 {link.TEXT}
               </a>
             ))}
@@ -52,7 +50,7 @@ const currentYear = new Date().getFullYear();
               >
                 <div class="relative p-3 rounded-lg bg-gray-50 text-gray-600 transition-all duration-300 hover:bg-gray-900 hover:text-white hover:shadow-lg hover:-translate-y-1">
                   <svg class="w-5 h-5" fill="currentColor">
-                    <use href={`${socialSvgPath}#${social.ICON}`}></use>
+                    <use href={`/social.svg#${social.ICON}`}></use>
                   </svg>
                 </div>
                 <!-- Tooltip -->
