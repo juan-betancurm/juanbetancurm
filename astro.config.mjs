@@ -10,5 +10,8 @@ export default defineConfig({
   integrations: [
     tailwind(),
     mdx()
-  ]
+  ],
+  build: {
+    inlineStylesheets: 'always',
+  },
 });

@@ -5,16 +5,15 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        // o agrega más fuentes:
-        // serif: ['Merriweather', 'serif'],
-        // mono: ['Fira Code', 'monospace'],
+        sans: ['Inter Variable', ' Inter', 'system-ui', 'sans-serif'],
+        
       },
       
       typography: {
         DEFAULT: {
           css: {
-            maxWidth: 'full', // Elimina el max-width de 65ch por defecto
+            maxWidth: 'full',
+            fontFeatureSettings: '"cv02", "cv03", "cv04"',
           },
         },
       },
